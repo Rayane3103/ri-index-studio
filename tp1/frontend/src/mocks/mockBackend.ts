@@ -33,7 +33,7 @@ let published: PublishedSettings = {
 }
 
 export async function getConfig(): Promise<AppConfig> {
-  return { local: true, max_documents_online: 1500 }
+  return { local: true, max_documents_online: 1500, store: 'file' }
 }
 
 export async function login(email: string): Promise<LoginResponse> {

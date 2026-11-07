@@ -16,6 +16,7 @@ Role = Literal["admin", "user"]
 class AppConfig(BaseModel):
     local: bool  # running on your PC (not on Vercel)
     max_documents_online: int | None  # None = no limit
+    store: Literal["redis", "file", "none"]  # where passwords and published settings are saved ("none" = nowhere)
 
 
 # POST /api/auth/login, GET /api/auth/me

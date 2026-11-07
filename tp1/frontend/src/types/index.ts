@@ -17,6 +17,8 @@ export interface AppConfig {
   local: boolean
   /** The online document cap. null = no cap. */
   max_documents_online: number | null
+  /** Where passwords and published settings are saved. "none" = online without Redis (Publish cannot work). */
+  store: 'redis' | 'file' | 'none'
 }
 
 /** POST /api/auth/login, GET /api/auth/me */

@@ -20,3 +20,6 @@ tp1/corpus/*.zip
 
 # Vercel CLI
 .vercel/
+
+# Secrets for the Vercel dashboard (import by hand, never pushed)
+tp1/backend/.env.vercel

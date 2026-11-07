@@ -13,7 +13,7 @@ export function useConfig(): AppConfig | null {
       cached = null
       throw e
     })
-    cached.then(setConfig).catch(() => setConfig({ local: false, max_documents_online: null }))
+    cached.then(setConfig).catch(() => setConfig({ local: false, max_documents_online: null, store: 'none' }))
   }, [])
   return config
 }

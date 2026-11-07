@@ -25,7 +25,7 @@ def get_published():
 
 @router.get("/config", response_model=AppConfig)
 def get_config():
-    return {"local": LOCAL, "max_documents_online": MAX_DOCUMENTS_ONLINE}
+    return {"local": LOCAL, "max_documents_online": MAX_DOCUMENTS_ONLINE, "store": store.kind()}
 
 
 @router.get("/settings/published", response_model=PublishedSettings, dependencies=[Depends(require_user)])

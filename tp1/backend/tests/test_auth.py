@@ -54,3 +54,13 @@ def test_too_many_wrong_codes():
     for _ in range(accounts.MAX_CODE_TRIES):
         accounts.reset_password(account, wrong, "newpassword1")
     assert accounts.reset_password(account, code, "newpassword1") == "Too many wrong codes. Ask for a new one."
+
+
+def test_online_without_redis_cannot_save(monkeypatch):
+    """On Vercel without Redis: reading gives "nothing saved", saving gives a clear error (not a crash)."""
+    monkeypatch.setattr(store, "LOCAL", False)
+    assert store.kind() == "none"
+    assert store.get("published_settings") is None
+    with pytest.raises(store.StoreUnavailable, match="Upstash Redis"):
+        store.set("published_settings", {"dataset": "csv"})
+    assert accounts.authenticate(accounts.ACCOUNTS[0]["email"], "wrong") is None  # login still works
