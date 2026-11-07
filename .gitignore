@@ -1,0 +1,22 @@
+# Python
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+
+# Local secrets and local data (never pushed)
+tp1/backend/.env
+tp1/backend/.local_store.json
+**/.env.local
+
+# Node
+**/node_modules/
+**/dist/
+
+# Built indexes (can be generated again from the app)
+tp1/saved_indexes/
+
+# The original download: its .sgm files are already extracted in tp1/corpus/xml/
+tp1/corpus/*.zip
+
+# Vercel CLI
+.vercel/

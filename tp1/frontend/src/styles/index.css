@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Design tokens — the only place where colors are defined.
+   Values are "R G B" channels so Tailwind can add opacity.
+   Light theme only. Blue = main. Orange = highlight (lines, accents, key button).
+------------------------------------------------------------------- */
+:root {
+  --paper: 255 255 255;
+  --wash: 249 250 252;        /* barely-there grey for subtle fills */
+  --line: 232 235 240;        /* thin separators */
+  --ink: 17 24 39;            /* main text */
+  --muted: 100 109 124;       /* secondary text (4.9:1 on white) */
+  --faint: 156 163 175;       /* decorative only, never for text */
+
+  --blue: 37 99 235;          /* main */
+  --blue-strong: 29 78 216;
+  --blue-soft: 239 244 255;
+  --orange: 249 115 22;       /* highlight: lines, progress, accents */
+  --orange-strong: 204 74 10; /* orange for text and button fill (AA on white) */
+  --orange-soft: 255 244 234;
+  --good: 22 128 74;
+  --bad: 200 30 30;           /* hard limits and blocking errors (AA on white) */
+  --bad-soft: 254 242 242;
+
+  color-scheme: light;
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+  font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+.num { font-variant-numeric: tabular-nums; }
+
+/* One consistent keyboard focus ring: blue outline. */
+:focus-visible {
+  outline: 2px solid rgb(var(--blue));
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Thin custom scrollbars for inner lists */
+.thin-scroll { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, rgb(var(--wash)) 25%, rgb(var(--line) / 0.7) 50%, rgb(var(--wash)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: 8px;
+}
+
+/* Range slider: the track colors come from RangeSlider (inline gradient), the thumb is styled here. */
+.range { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 999px; cursor: pointer; }
+.range:disabled { cursor: not-allowed; opacity: 0.6; }
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: rgb(var(--paper)); border: 2px solid rgb(var(--blue));
+  box-shadow: 0 1px 4px rgb(16 24 40 / 0.18); transition: transform 0.15s, border-color 0.15s;
+}
+.range::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgb(var(--paper)); border: 2px solid rgb(var(--blue));
+  box-shadow: 0 1px 4px rgb(16 24 40 / 0.18); transition: transform 0.15s, border-color 0.15s;
+}
+.range:active::-webkit-slider-thumb { transform: scale(1.15); }
+.range:active::-moz-range-thumb { transform: scale(1.15); }
+.range[aria-invalid='true']::-webkit-slider-thumb { border-color: rgb(var(--bad)); }
+.range[aria-invalid='true']::-moz-range-thumb { border-color: rgb(var(--bad)); }

@@ -1,0 +1,4 @@
+# Packages for the Vercel Python function (tp1/api/index.py). Local dev uses backend/requirements.txt.
+fastapi==0.146.0
+pydantic==2.14.1
+starlette==1.9.0
